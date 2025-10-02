@@ -60,115 +60,278 @@
   <h3>Made By : Smarty MS🙃</h3>
 
   <div class="code-box" id="codeBox">
-javascript:(function(){  
-  /* Media Sniffer v3: capture final resolved URLs incl. response.url, XHR responseURL, blob->createObjectURL mapping */  
-  function initUI(){  
-    if(document.getElementById("mediaSnifferBox")) return;  
-    var box=document.createElement("div");  
-    box.id="mediaSnifferBox";  
-    Object.assign(box.style,{  
-      position:"fixed",top:"10px",left:"10px",width:"360px",maxHeight:"320px",  
-      overflow:"auto",background:"#0b0b0b",color:"#d1ffd1",padding:"10px",  
-      borderRadius:"10px",fontSize:"12px",zIndex:2147483647,border:"1px solid #333",boxShadow:"0 6px 18px rgba(0,0,0,0.6)"  
-    });  
-    var head=document.createElement("div");  
-    head.style.display="flex";  
-    head.style.justifyContent="space-between";  
-    head.style.alignItems="center";  
-    head.style.marginBottom="8px";  
-    head.innerHTML="<b>🎥 Media Sniffer</b>";  
-    var leftHead=document.createElement("div");  
-    leftHead.style.display="flex";  
-    leftHead.style.gap="6px";  
-    var btnClear=document.createElement("button");  
-    btnClear.textContent="Clear";  
-    Object.assign(btnClear.style,{background:"#444",color:"#fff",border:"none",borderRadius:"6px",cursor:"pointer",padding:"4px 8px"});  
-    btnClear.onclick=function(){ var list=document.getElementById("mediaSnifferList"); if(list) list.innerHTML="";};  
-    leftHead.appendChild(btnClear);  
-    head.prepend(leftHead);  
-    var close=document.createElement("button");  
-    close.textContent="❌";  
-    Object.assign(close.style,{background:"crimson",color:"#fff",border:"none",borderRadius:"6px",cursor:"pointer",padding:"4px 8px"});  
-    close.onclick=function(){box.remove();};  
-    head.appendChild(close);  
-    box.appendChild(head);  
-    var list=document.createElement("div");  
-    list.id="mediaSnifferList";  
-    box.appendChild(list);  
-    document.body.appendChild(box);  
-  }  
-  
-  function normalizeAndResolve(url){  
-    try{ return new URL(url, location.href).href; }catch(e){ return url; }  
-  }  
-  
-  function addLink(url, hint){  
-    if(!url) return;  
-    url = String(url).trim();  
-    var full = normalizeAndResolve(url);  
-    initUI();  
-    // avoid duplicates  
-    if(document.querySelector(`[data-sniffed='${CSS.escape(full)}']`)) return;  
-    var list=document.getElementById("mediaSnifferList");  
-    var item=document.createElement("div");  
-    item.setAttribute("data-sniffed",full);  
-    item.style.marginBottom="8px";  
-    item.style.wordBreak="break-all";  
-    var title = document.createElement("div");  
-    title.style.fontSize="11px";  
-    title.style.color="#9be29b";  
-    title.textContent = hint ? hint : "Captured URL:";  
-    var span=document.createElement("div");  
-    span.textContent=full;  
-    span.style.marginTop="4px";  
-    span.style.fontSize="12px";  
-    span.style.color="#e6ffe6";  
-    var controls=document.createElement("div");  
-    controls.style.marginTop="6px";  
-    controls.style.display="flex";  
-    controls.style.gap="6px";  
-  
-    var copy=document.createElement("button");  
-    copy.textContent="📋 Copy";  
-    Object.assign(copy.style,{background:"pink",border:"none",padding:"6px 8px",borderRadius:"6px",cursor:"pointer"});  
-    copy.onclick=function(){  
-      navigator.clipboard.writeText(full).then(()=>{ copy.textContent="✅ Copied"; setTimeout(()=>copy.textContent="📋 Copy",1500); }, ()=>{ copy.textContent="✖️"; setTimeout(()=>copy.textContent="📋 Copy",1500); });  
-    };  
-  
-    var open=document.createElement("button");  
-    open.textContent="🔗 Open";  
-    Object.assign(open.style,{background:"#2f8cff",color:"#fff",border:"none",padding:"6px 8px",borderRadius:"6px",cursor:"pointer"});  
-    open.onclick=function(){ window.open(full,"_blank"); };  
-  
-    var dl=document.createElement("button");  
-    dl.textContent="⬇️ Download";  
-    Object.assign(dl.style,{background:"#28a745",color:"#fff",border:"none",padding:"6px 8px",borderRadius:"6px",cursor:"pointer"});  
-    dl.onclick=function(){  
-      var a=document.createElement("a");  
-      a.href=full;  
-      a.download="";  
-      document.body.appendChild(a);  
-      a.click();  
-      a.remove();  
-    };  
-  
-    controls.appendChild(copy);  
-    controls.appendChild(open);  
-    controls.appendChild(dl);  
-  
-    item.appendChild(title);  
-    item.appendChild(span);  
-    item.appendChild(controls);  
-    list.appendChild(item);  
-  }  
-  
-  // Avoid re-patching  
-  if(window._mediaSnifferV3Patched) {  
-    console.log("MediaSniffer already active");  
-  } else {  
-    window._mediaSnifferV3Patched = true;  
-    ... (full code continues exactly as given) ...
-})();  
+javascript:(function(){
+  /* Media Sniffer v3: capture final resolved URLs incl. response.url, XHR responseURL, blob->createObjectURL mapping */
+  function initUI(){
+    if(document.getElementById("mediaSnifferBox")) return;
+    var box=document.createElement("div");
+    box.id="mediaSnifferBox";
+    Object.assign(box.style,{
+      position:"fixed",top:"10px",left:"10px",width:"360px",maxHeight:"320px",
+      overflow:"auto",background:"#0b0b0b",color:"#d1ffd1",padding:"10px",
+      borderRadius:"10px",fontSize:"12px",zIndex:2147483647,border:"1px solid #333",boxShadow:"0 6px 18px rgba(0,0,0,0.6)"
+    });
+    var head=document.createElement("div");
+    head.style.display="flex";
+    head.style.justifyContent="space-between";
+    head.style.alignItems="center";
+    head.style.marginBottom="8px";
+    head.innerHTML="<b>🎥 Media Sniffer</b>";
+    var leftHead=document.createElement("div");
+    leftHead.style.display="flex";
+    leftHead.style.gap="6px";
+    var btnClear=document.createElement("button");
+    btnClear.textContent="Clear";
+    Object.assign(btnClear.style,{background:"#444",color:"#fff",border:"none",borderRadius:"6px",cursor:"pointer",padding:"4px 8px"});
+    btnClear.onclick=function(){ var list=document.getElementById("mediaSnifferList"); if(list) list.innerHTML="";};
+    leftHead.appendChild(btnClear);
+    head.prepend(leftHead);
+    var close=document.createElement("button");
+    close.textContent="❌";
+    Object.assign(close.style,{background:"crimson",color:"#fff",border:"none",borderRadius:"6px",cursor:"pointer",padding:"4px 8px"});
+    close.onclick=function(){box.remove();};
+    head.appendChild(close);
+    box.appendChild(head);
+    var list=document.createElement("div");
+    list.id="mediaSnifferList";
+    box.appendChild(list);
+    document.body.appendChild(box);
+  }
+
+  function normalizeAndResolve(url){
+    try{ return new URL(url, location.href).href; }catch(e){ return url; }
+  }
+
+  function addLink(url, hint){
+    if(!url) return;
+    url = String(url).trim();
+    var full = normalizeAndResolve(url);
+    initUI();
+    // avoid duplicates
+    if(document.querySelector(`[data-sniffed='${CSS.escape(full)}']`)) return;
+    var list=document.getElementById("mediaSnifferList");
+    var item=document.createElement("div");
+    item.setAttribute("data-sniffed",full);
+    item.style.marginBottom="8px";
+    item.style.wordBreak="break-all";
+    var title = document.createElement("div");
+    title.style.fontSize="11px";
+    title.style.color="#9be29b";
+    title.textContent = hint ? hint : "Captured URL:";
+    var span=document.createElement("div");
+    span.textContent=full;
+    span.style.marginTop="4px";
+    span.style.fontSize="12px";
+    span.style.color="#e6ffe6";
+    var controls=document.createElement("div");
+    controls.style.marginTop="6px";
+    controls.style.display="flex";
+    controls.style.gap="6px";
+
+    var copy=document.createElement("button");
+    copy.textContent="📋 Copy";
+    Object.assign(copy.style,{background:"pink",border:"none",padding:"6px 8px",borderRadius:"6px",cursor:"pointer"});
+    copy.onclick=function(){
+      navigator.clipboard.writeText(full).then(()=>{ copy.textContent="✅ Copied"; setTimeout(()=>copy.textContent="📋 Copy",1500); }, ()=>{ copy.textContent="✖️"; setTimeout(()=>copy.textContent="📋 Copy",1500); });
+    };
+
+    var open=document.createElement("button");
+    open.textContent="🔗 Open";
+    Object.assign(open.style,{background:"#2f8cff",color:"#fff",border:"none",padding:"6px 8px",borderRadius:"6px",cursor:"pointer"});
+    open.onclick=function(){ window.open(full,"_blank"); };
+
+    var dl=document.createElement("button");
+    dl.textContent="⬇️ Download";
+    Object.assign(dl.style,{background:"#28a745",color:"#fff",border:"none",padding:"6px 8px",borderRadius:"6px",cursor:"pointer"});
+    dl.onclick=function(){
+      var a=document.createElement("a");
+      a.href=full;
+      a.download="";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
+    controls.appendChild(copy);
+    controls.appendChild(open);
+    controls.appendChild(dl);
+
+    item.appendChild(title);
+    item.appendChild(span);
+    item.appendChild(controls);
+    list.appendChild(item);
+  }
+
+  // Avoid re-patching
+  if(window._mediaSnifferV3Patched) {
+    console.log("MediaSniffer already active");
+  } else {
+    window._mediaSnifferV3Patched = true;
+
+    // 1) PATCH fetch
+    (function(){
+      var origFetch = window.fetch;
+      window.fetch = function(...args){
+        return origFetch.apply(this,args).then(function(resp){
+          try{
+            if(resp && resp.url) {
+              addLink(resp.url, "fetch response.url");
+            }
+            if(resp && resp.blob){
+              var origBlob = resp.blob.bind(resp);
+              resp.blob = function(){
+                return origBlob().then(function(b){
+                  try{ b._fromUrl = resp.url || b._fromUrl || null; }catch(e){}
+                  return b;
+                });
+              };
+            }
+          }catch(e){}
+          return resp;
+        });
+      };
+    })();
+
+    // 2) PATCH XHR
+    (function(){
+      var origOpen = XMLHttpRequest.prototype.open;
+      var origSend = XMLHttpRequest.prototype.send;
+      XMLHttpRequest.prototype.open = function(method, url, async, user, pass){
+        try{ this._ms_open_url = url; }catch(e){}
+        return origOpen.apply(this, arguments);
+      };
+      XMLHttpRequest.prototype.send = function(body){
+        try{
+          this.addEventListener('load', function(){
+            try{
+              var final = this.responseURL || this._ms_open_url;
+              if(final) addLink(final, "XHR responseURL");
+            }catch(e){}
+          });
+        }catch(e){}
+        return origSend.apply(this, arguments);
+      };
+    })();
+
+    // 3) PATCH Response.blob
+    (function(){
+      try{
+        var respProto = (window.Response && window.Response.prototype);
+        if(respProto && respProto.blob){
+          var origRespBlob = respProto.blob;
+          respProto.blob = function(){
+            var p = origRespBlob.apply(this, arguments);
+            try{
+              var respUrl = this.url || null;
+              return p.then(function(b){
+                try{ b._fromUrl = b._fromUrl || respUrl || null; }catch(e){}
+                return b;
+              });
+            }catch(e){ return p; }
+          };
+        }
+      }catch(e){}
+    })();
+
+    // 4) PATCH URL.createObjectURL
+    (function(){
+      try{
+        var origCreate = URL.createObjectURL.bind(URL);
+        URL.createObjectURL = function(obj){
+          try{
+            if(obj && obj._fromUrl){ addLink(obj._fromUrl, "blob -> original URL"); }
+          }catch(e){}
+          return origCreate(obj);
+        };
+      }catch(e){}
+    })();
+
+    // 5) PATCH media.src
+    (function(){
+      try{
+        var proto = HTMLMediaElement && HTMLMediaElement.prototype;
+        if(proto){
+          var desc = Object.getOwnPropertyDescriptor(proto, 'src');
+          if(desc && desc.set){
+            var origSrcSet = desc.set;
+            Object.defineProperty(proto, 'src', {
+              configurable:true,
+              enumerable:true,
+              get: desc.get || function(){ return this.getAttribute('src'); },
+              set: function(v){
+                try{
+                  if(v && typeof v === 'string'){
+                    if(/^blob:/i.test(v)){ addLink(v, "media.src (blob URL)"); }
+                    else { addLink(v, "media.src assignment"); }
+                  }
+                }catch(e){}
+                return origSrcSet.call(this, v);
+              }
+            });
+          } else {
+            var origSetAttr = proto.setAttribute;
+            proto.setAttribute = function(name, value){
+              try{ if(name === 'src' && value){ addLink(value, "media.setAttribute src"); } }catch(e){}
+              return origSetAttr.apply(this, arguments);
+            };
+          }
+        }
+      }catch(e){}
+    })();
+
+    // 6) sniff existing sources
+    (function(){
+      try{
+        document.querySelectorAll("video source, audio source").forEach(function(el){
+          if(el.src) addLink(el.src, "<source> tag");
+        });
+        document.querySelectorAll("video, audio").forEach(function(m){
+          if(m.currentSrc) addLink(m.currentSrc, "media.currentSrc");
+          if(m.src) addLink(m.src, "media.src (existing)");
+          var sources = m.querySelectorAll && m.querySelectorAll('source');
+          if(sources){ sources.forEach(function(s){ if(s.src) addLink(s.src, "<source> in media"); }); }
+        });
+      }catch(e){}
+    })();
+
+    // 7) MutationObserver
+    (function(){
+      try{
+        var mo = new MutationObserver(function(recs){
+          recs.forEach(function(r){
+            r.addedNodes && r.addedNodes.forEach(function(n){
+              if(n.nodeType===1){
+                if(n.tagName && (n.tagName.toLowerCase()==='source')){
+                  if(n.src) addLink(n.src, "mutated <source>");
+                }
+                if(n.tagName && (n.tagName.toLowerCase()==='video' || n.tagName.toLowerCase()==='audio')){
+                  var m = n;
+                  if(m.src) addLink(m.src, "mutated media.src");
+                  if(m.currentSrc) addLink(m.currentSrc, "mutated media.currentSrc");
+                  var srs = m.querySelectorAll && m.querySelectorAll('source');
+                  if(srs) srs.forEach(function(s){ if(s.src) addLink(s.src, "mutated <source>"); });
+                }
+              }
+            });
+          });
+        });
+        mo.observe(document.documentElement || document.body, { childList:true, subtree:true });
+      }catch(e){}
+    })();
+  }
+
+  // Load eruda
+  (function(){
+    if(!window.eruda){
+      var s=document.createElement("script");
+      s.src="https://cdn.jsdelivr.net/npm/eruda";
+      document.body.appendChild(s);
+      s.onload=function(){ try{ eruda.init(); console.log("✅ Eruda loaded"); }catch(e){} };
+    } else { console.log("ℹ️ eruda already present"); }
+  })();
+
+  console.log("🔍 MediaSniffer v3 active — will capture final response URLs, XHR responseURL, blob->createObjectURL mapping.");
+})();
   </div>
 
   <button onclick="copyCode()">COPY CODE</button>
